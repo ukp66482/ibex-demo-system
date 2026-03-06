@@ -1,5 +1,5 @@
 # This is the same sets of compilation flags used in ibex CoreMark core_portme.mak.
-set(CMAKE_C_FLAGS "-mtune=sifive-3-series -O3 -falign-functions=16 -funroll-all-loops -finline-functions -falign-jumps=4 -mstrict-align")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=sifive-3-series -O3 -falign-functions=16 -funroll-all-loops -finline-functions -falign-jumps=4 -mstrict-align")
 
 add_library(lcd_st7735_lib
 ${CMAKE_CURRENT_SOURCE_DIR}/../../../../vendor/display_drivers/core/lcd_base.c

@@ -9,6 +9,7 @@ ftdi device_desc "Digilent USB Device"
 ftdi vid_pid 0x0403 0x6010
 ftdi channel 0
 ftdi layout_init 0x0088 0x008b
+ftdi tdo_sample_edge falling
 
 reset_config none
 
