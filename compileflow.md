@@ -28,48 +28,21 @@ cd ../../..
 
 ---
 
-## Step 2：合成 FPGA Bitstream
+## Step 2 & 3：合成 Bitstream + 燒錄 FPGA
+
+**Arty A7-100T：**
 
 ```bash
-# Arty A7
-fusesoc --cores-root=. run --target=synth --setup --build lowrisc:ibex:demo_system
+fusesoc --cores-root=. run --target=synth_artya7 --setup --build lowrisc:ibex:demo_system
+vivado -mode batch -source ./programtcl/program_artya7.tcl
+```
 
-# Nexys A7
+**Nexys A7-100T：**
+
+```bash
 fusesoc --cores-root=. run --target=synth_nexysa7 --setup --build lowrisc:ibex:demo_system
+vivado -mode batch -source ./programtcl/program_nexysa7.tcl
 ```
-
-大概跑 10-20 分鐘，bitstream 產出在 `build/` 目錄下。
-
----
-
-## Step 3：燒錄 FPGA
-
-用 Vivado batch mode (Nexysa7)： 
-
-```bash
-vivado -mode batch -source ./programtcl/program_fpga.tcl
-```
-
-`program_fpga.tcl` 範例（Arty A7）：
-
-```tcl
-open_hw_manager
-connect_hw_server
-open_hw_target
-set device [lindex [get_hw_devices] 0]
-current_hw_device $device
-set_property PROGRAM.FILE {build/lowrisc_ibex_demo_system_0/synth-vivado/lowrisc_ibex_demo_system_0.runs/impl_1/top_artya7.bit} $device
-program_hw_devices $device
-close_hw_manager
-```
-
-Nexys A7 改成：
-
-```tcl
-set_property PROGRAM.FILE {build/lowrisc_ibex_demo_system_0/synth_nexysa7-vivado/lowrisc_ibex_demo_system_0.runs/impl_1/top_nexysa7.bit} $device
-```
-
-或直接開 Vivado GUI → Hardware Manager → Program Device。
 
 ---
 

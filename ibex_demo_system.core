@@ -153,7 +153,7 @@ targets:
   default: &default_target
     filesets:
       - files_rtl
-  synth:
+  synth_artya7:
     <<: *default_target
     default_tool: vivado
     filesets_append:
